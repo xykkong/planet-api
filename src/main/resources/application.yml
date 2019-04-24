@@ -1,0 +1,12 @@
+spring:  
+  application:
+    name: planet-api
+  data:
+    mongodb:
+      uri: mongodb+srv://b2w:b2w@mongodbcluster-ogtuj.mongodb.net/test?retryWrites=true
+      database: test
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  main:
+    allow-bean-definition-overriding: true
+    
