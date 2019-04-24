@@ -5,7 +5,7 @@ A simple REST API built using Spring Boot
 Building planet-api
 -----------
 
-For easy run, use can run this project on docker. 
+For easy run, you can run this project on docker. 
 Just run the following commands:
 
 sudo ./gradlew build docker
