@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/xykkong/planet-api/branch/master/graph/badge.svg)](https://codecov.io/gh/xykkong/planet-api)
+
 # planet-api
 A simple REST API built with Spring Boot.
 
