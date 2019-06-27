@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" tests="10" skipped="0" failures="0" errors="0" timestamp="2019-06-27T20:05:40" hostname="suportelocal-Inspiron-5457" time="103.444">
+  <properties/>
+  <testcase name="getAllPlanets_EmptyList_shouldReturnOk" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.326"/>
+  <testcase name="createPlanet_Tatooine_shouldReturnCreated" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.246"/>
+  <testcase name="createPlanet_null_shouldReturnBadRequest" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.011"/>
+  <testcase name="deletePlanet_1_shouldReturnOk" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.014"/>
+  <testcase name="getPlanetByName_Mars_shouldReturnNotFound" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.008"/>
+  <testcase name="getPlanetByName_Alderaan_shouldReturnOk" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="39.075"/>
+  <testcase name="getPlanetById_1_shouldReturnOk" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.009"/>
+  <testcase name="getPlanetById_null_shouldReturnNotFound" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.007"/>
+  <testcase name="deletePlanet_null_shouldReturnNotFound" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="0.008"/>
+  <testcase name="getAllPlanets_shouldReturnOk" classname="br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests" time="63.726"/>
+  <system-out><![CDATA[2019-06-27 17:05:39.049  INFO 22976 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests], using SpringBootContextLoader
+2019-06-27 17:05:39.050  INFO 22976 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2019-06-27 17:05:39.051  INFO 22976 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests]: PlanetControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2019-06-27 17:05:39.074  INFO 22976 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration br.rj.b2w.starwars.planetapi.PlanetServiceApplication for test class br.rj.b2w.starwars.planetapi.controller.PlanetControllerTests
+2019-06-27 17:05:39.075  INFO 22976 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2019-06-27 17:05:39.076  INFO 22976 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@cf7b5c0, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4c4a5364, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@9e717e4, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1991169e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2879e9d9, org.springframework.test.context.transaction.TransactionalTestExecutionListener@36b64ec1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@75f27c4, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@166bf457, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@71bbf062, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@75ff78d2, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@be000ae, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@42e094c9]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.4.RELEASE)
+
+2019-06-27 17:05:39.111  INFO 22976 --- [    Test worker] b.r.b.s.p.c.PlanetControllerTests        : Starting PlanetControllerTests on suportelocal-Inspiron-5457 with PID 22976 (started by xiao.kong in /home/xiao.kong/Documentos/workspace/planet-api)
+2019-06-27 17:05:39.113  INFO 22976 --- [    Test worker] b.r.b.s.p.c.PlanetControllerTests        : No active profile set, falling back to default profiles: default
+2019-06-27 17:05:39.853  INFO 22976 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-27 17:05:39.867  INFO 22976 --- [    Test worker] b.r.b.s.planetapi.config.WebConfig       : --- Adding Global CORS Configuration
+2019-06-27 17:05:39.900  INFO 22976 --- [    Test worker] b.r.b.s.planetapi.config.WebConfig       : --- Adding Redirect Servlet
+2019-06-27 17:05:39.991  INFO 22976 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2019-06-27 17:05:39.992  INFO 22976 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2019-06-27 17:05:40.000  INFO 22976 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 8 ms
+2019-06-27 17:05:40.022  INFO 22976 --- [    Test worker] b.r.b.s.p.c.PlanetControllerTests        : Started PlanetControllerTests in 0.942 seconds (JVM running for 7.943)
+2019-06-27 17:05:40.613  WARN 22976 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<java.lang.Object> br.rj.b2w.starwars.planetapi.controller.PlanetController.createPlanet(br.rj.b2w.starwars.planetapi.dto.PlanetRequestDTO)]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
