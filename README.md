@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/xykkong/planet-api/branch/master/graph/badge.svg)](https://codecov.io/gh/xykkong/planet-api)
+[![Build Status](https://img.shields.io/circleci/build/github/xykkong/planet-api.svg)](https://circleci.com/gh/xykkong/planet-api)  [![codecov](https://codecov.io/gh/xykkong/planet-api/branch/master/graph/badge.svg)](https://codecov.io/gh/xykkong/planet-api)
 
 # planet-api
 A simple REST API built with Spring Boot.
