@@ -18,12 +18,12 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Component
 @Slf4j
-public class DbInitializer implements CommandLineRunner {
+public class DatabaseInitializer implements CommandLineRunner {
 
 	private PlanetRepository planetRepository;
 	
 	@Autowired
-	public DbInitializer(PlanetRepository planetRepository) {
+	public DatabaseInitializer(PlanetRepository planetRepository) {
 		this.planetRepository = planetRepository;
 	}
 
