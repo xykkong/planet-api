@@ -1,4 +1,4 @@
-package br.rj.b2w.starwars.planetapi.controller;
+package com.example.starwars.planetapi.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
@@ -31,20 +31,20 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.rj.b2w.starwars.planetapi.dto.PlanetRequestDTO;
-import br.rj.b2w.starwars.planetapi.model.Planet;
-import br.rj.b2w.starwars.planetapi.repository.PlanetRepository;
+import com.example.starwars.planetapi.dto.PlanetRequestDTO;
+import com.example.starwars.planetapi.model.Planet;
+import com.example.starwars.planetapi.repository.PlanetRepository;
 
 /**
- * 
+ *
  * Unit test for PlanetController
- * 
+ *
  * @author xiao
  *
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(PlanetController.class)
-public class PlanetControllerTests {
+public class PlanetControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
