@@ -1,4 +1,4 @@
-package br.rj.b2w.starwars.planetapi.config;
+package com.example.starwars.planetapi.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -8,25 +8,25 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 
+ *
  * General Web Configuration
- * 
+ *
  * @author xiao
  *
  */
 @Configuration
 @Slf4j
 public class WebConfig implements WebMvcConfigurer {
-	
+
 	/*
-	 * Redirect to Swagger documentation page 
+	 * Redirect to Swagger documentation page
 	 */
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		log.info("--- Adding Redirect Servlet");
-		registry.addRedirectViewController("/", "swagger-ui.html");
+		registry.addRedirectViewController("/", "swagger-ui/index.html");
 	}
-	
+
 	/*
 	 * CORS filter configuration
 	 */

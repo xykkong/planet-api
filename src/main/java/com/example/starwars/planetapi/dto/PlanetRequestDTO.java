@@ -1,14 +1,14 @@
-package br.rj.b2w.starwars.planetapi.dto;
+package com.example.starwars.planetapi.dto;
 
-import br.rj.b2w.starwars.planetapi.model.Planet;
+import com.example.starwars.planetapi.model.Planet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 
- * Planet Data Transfer Object used in create Planet endpoint  
- * 
+ *
+ * Planet Data Transfer Object used in create Planet endpoint
+ *
  * @author xiao
  *
  */

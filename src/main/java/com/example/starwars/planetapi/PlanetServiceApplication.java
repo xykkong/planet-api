@@ -1,4 +1,4 @@
-package br.rj.b2w.starwars.planetapi;
+package com.example.starwars.planetapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

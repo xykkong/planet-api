@@ -1,4 +1,4 @@
-package br.rj.b2w.starwars.planetapi.model;
+package com.example.starwars.planetapi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 
+ *
  * Planet Entity
- * 
+ *
  * @author xiao
  *
  */

@@ -1,4 +1,4 @@
-package br.rj.b2w.starwars.planetapi.controller;
+package com.example.starwars.planetapi.controller;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,9 +29,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.rj.b2w.starwars.planetapi.dto.PlanetRequestDTO;
-import br.rj.b2w.starwars.planetapi.model.Planet;
-import br.rj.b2w.starwars.planetapi.repository.PlanetRepository;
+import com.example.starwars.planetapi.dto.PlanetRequestDTO;
+import com.example.starwars.planetapi.model.Planet;
+import com.example.starwars.planetapi.repository.PlanetRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -39,9 +39,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 /**
- * 
+ *
  * Rest API Controller for Planets endpoint
- * 
+ *
  * @author xiao
  *
  */
@@ -53,7 +53,7 @@ public class PlanetController {
 
 	private PlanetRepository planetRepository;
 
-	private static final String swapiURL = "https://swapi.co/api/planets/?search=";
+	private static final String swapiURL = "https://swapi.dev/api/planets/?search=";
 
 	@Autowired
 	public PlanetController(PlanetRepository planetRepository) {

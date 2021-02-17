@@ -1,4 +1,4 @@
-package br.rj.b2w.starwars.planetapi.config;
+package com.example.starwars.planetapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,9 +13,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * 
+ *
  * Swagger Configuration
- * 
+ *
  * @author xiao
  *
  */
@@ -24,7 +24,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Slf4j
 public class SwaggerConfig {
 
-	private static final String resourcePackage = "br.rj.b2w.starwars.planetapi.controller";
+	private static final String resourcePackage = "com.example.starwars.planetapi.controller";
 
 	@Bean
 	public Docket api() {

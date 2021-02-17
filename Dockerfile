@@ -4,4 +4,4 @@ ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","br.rj.b2w.starwars.planetapi.PlanetServiceApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.example.starwars.planetapi.PlanetServiceApplication"]

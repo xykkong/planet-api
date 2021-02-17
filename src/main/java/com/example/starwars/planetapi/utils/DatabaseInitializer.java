@@ -1,11 +1,11 @@
-package br.rj.b2w.starwars.planetapi.utils;
+package com.example.starwars.planetapi.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import br.rj.b2w.starwars.planetapi.model.Planet;
-import br.rj.b2w.starwars.planetapi.repository.PlanetRepository;
+import com.example.starwars.planetapi.model.Planet;
+import com.example.starwars.planetapi.repository.PlanetRepository;
 import lombok.extern.slf4j.Slf4j;
 
 /**

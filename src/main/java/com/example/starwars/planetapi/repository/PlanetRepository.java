@@ -1,15 +1,15 @@
-package br.rj.b2w.starwars.planetapi.repository;
+package com.example.starwars.planetapi.repository;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import br.rj.b2w.starwars.planetapi.model.Planet;
+import com.example.starwars.planetapi.model.Planet;
 
 /**
- * 
+ *
  * Planet Repository
- * 
+ *
  * @author xiao
  *
  */
