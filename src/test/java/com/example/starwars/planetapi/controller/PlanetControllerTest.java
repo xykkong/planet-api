@@ -20,13 +20,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +40,6 @@ import com.example.starwars.planetapi.repository.PlanetRepository;
  * @author xiao
  *
  */
-@RunWith(SpringRunner.class)
 @WebMvcTest(PlanetController.class)
 public class PlanetControllerTest {
 
@@ -69,10 +66,9 @@ public class PlanetControllerTest {
 		when(planetRepository.findAll()).thenReturn(planets);
 
 		mockMvc.perform(get(planetEndpoint)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$", hasSize(3))).andExpect(jsonPath("$[0].id", is("1")))
-				.andExpect(jsonPath("$[0].name", is("Tatooine"))).andExpect(jsonPath("$[0].climate", is("arid")))
-				.andExpect(jsonPath("$[0].terrain", is("desert")))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(jsonPath("$", hasSize(3)))
+				.andExpect(jsonPath("$[0].id", is("1"))).andExpect(jsonPath("$[0].name", is("Tatooine")))
+				.andExpect(jsonPath("$[0].climate", is("arid"))).andExpect(jsonPath("$[0].terrain", is("desert")))
 				.andExpect(jsonPath("$[0].starWarsApparition", is("5")))
 
 				.andExpect(jsonPath("$[1].id", is("2"))).andExpect(jsonPath("$[1].name", is("Alderaan")))
@@ -151,9 +147,8 @@ public class PlanetControllerTest {
 		when(planetRepository.findById("1")).thenReturn(planet);
 
 		mockMvc.perform(get(planetEndpoint + "/1")).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$.id", is("1"))).andExpect(jsonPath("$.name", is("Alderaan")))
-				.andExpect(jsonPath("$.climate", is("temperate")))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(jsonPath("$.id", is("1")))
+				.andExpect(jsonPath("$.name", is("Alderaan"))).andExpect(jsonPath("$.climate", is("temperate")))
 				.andExpect(jsonPath("$.terrain", is("grasslands, mountains")))
 				.andExpect(jsonPath("$.starWarsApparition", is("2")));
 

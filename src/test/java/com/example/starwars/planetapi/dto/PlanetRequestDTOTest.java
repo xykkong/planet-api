@@ -1,11 +1,9 @@
 package com.example.starwars.planetapi.dto;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.starwars.planetapi.model.Planet;
 
@@ -16,7 +14,6 @@ import com.example.starwars.planetapi.model.Planet;
  * @author xiao
  *
  */
-@RunWith(SpringRunner.class)
 @WebMvcTest(PlanetRequestDTO.class)
 public class PlanetRequestDTOTest {
 
