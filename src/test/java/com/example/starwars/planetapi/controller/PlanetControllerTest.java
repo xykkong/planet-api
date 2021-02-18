@@ -69,7 +69,7 @@ public class PlanetControllerTest {
 		when(planetRepository.findAll()).thenReturn(planets);
 
 		mockMvc.perform(get(planetEndpoint)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$", hasSize(3))).andExpect(jsonPath("$[0].id", is("1")))
 				.andExpect(jsonPath("$[0].name", is("Tatooine"))).andExpect(jsonPath("$[0].climate", is("arid")))
 				.andExpect(jsonPath("$[0].terrain", is("desert")))
@@ -95,7 +95,7 @@ public class PlanetControllerTest {
 		when(planetRepository.findAll()).thenReturn(new ArrayList<Planet>());
 
 		mockMvc.perform(get(planetEndpoint)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$", hasSize(0)));
 
 		verify(planetRepository, times(1)).findAll();
@@ -113,7 +113,7 @@ public class PlanetControllerTest {
 		when(planetRepository.findByName("Alderaan")).thenReturn(planets);
 
 		mockMvc.perform(get(planetEndpoint + "?name=Alderaan")).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$[0].id", is("1"))).andExpect(jsonPath("$[0].name", is("Alderaan")))
 				.andExpect(jsonPath("$[0].climate", is("temperate")))
 				.andExpect(jsonPath("$[0].terrain", is("grasslands, mountains")))
@@ -134,7 +134,7 @@ public class PlanetControllerTest {
 		when(planetRepository.findByName("mars")).thenReturn(null);
 
 		mockMvc.perform(get(planetEndpoint + "?name=mars")).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$", hasSize(0)));
 
 		verify(planetRepository, times(1)).findByName("mars");
@@ -151,7 +151,7 @@ public class PlanetControllerTest {
 		when(planetRepository.findById("1")).thenReturn(planet);
 
 		mockMvc.perform(get(planetEndpoint + "/1")).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(jsonPath("$.id", is("1"))).andExpect(jsonPath("$.name", is("Alderaan")))
 				.andExpect(jsonPath("$.climate", is("temperate")))
 				.andExpect(jsonPath("$.terrain", is("grasslands, mountains")))

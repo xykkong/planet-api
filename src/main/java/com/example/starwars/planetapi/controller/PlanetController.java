@@ -63,7 +63,7 @@ public class PlanetController {
 	/*
 	 * TODO Maybe pagination is necessary here
 	 */
-	@ApiOperation(value = "Get a list of Planets", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(value = "Get a list of Planets", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Planets retrieved successfully") })
 	@GetMapping
 	public List<Planet> getPlanets(@ApiParam(value = "Planet name") @RequestParam(required = false) String name) {
@@ -81,7 +81,7 @@ public class PlanetController {
 		return planets;
 	}
 
-	@ApiOperation(value = "Get a Planet by ID", response = Planet.class, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(value = "Get a Planet by ID", response = Planet.class, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Planet found successfully"),
 			@ApiResponse(code = 404, message = "Planet not found") })
 	@GetMapping("/{id}")
@@ -96,7 +96,7 @@ public class PlanetController {
 		return ResponseEntity.ok().body(planetOptional.get());
 	}
 
-	@ApiOperation(value = "Create a new Planet", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(value = "Create a new Planet", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Planet created successfully"),
 			@ApiResponse(code = 400, message = "Required request body is missing") })
 	@PostMapping
@@ -110,7 +110,7 @@ public class PlanetController {
 		return ResponseEntity.created(locationUri).build();
 	}
 
-	@ApiOperation(value = "Delete a Planet by ID", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(value = "Delete a Planet by ID", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Planet deleted successfully"),
 			@ApiResponse(code = 404, message = "Planet Not Found") })
 	@DeleteMapping("/{id}")

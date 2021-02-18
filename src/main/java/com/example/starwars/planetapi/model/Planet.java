@@ -37,5 +37,4 @@ public class Planet {
 	public void setStarWarsApparition(int starWarsApparition) {
 		this.starWarsApparition = String.valueOf(starWarsApparition);
 	}
-
 }
