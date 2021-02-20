@@ -1,4 +1,4 @@
-spring:  
+spring:
   application:
     name: planet-api
   data:
@@ -9,4 +9,3 @@ spring:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   main:
     allow-bean-definition-overriding: true
-    

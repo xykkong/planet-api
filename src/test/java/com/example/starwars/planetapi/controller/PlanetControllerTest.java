@@ -15,11 +15,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.example.starwars.planetapi.dto.PlanetRequestDTO;
+import com.example.starwars.planetapi.model.Planet;
+import com.example.starwars.planetapi.repository.PlanetRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,206 +30,213 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.example.starwars.planetapi.dto.PlanetRequestDTO;
-import com.example.starwars.planetapi.model.Planet;
-import com.example.starwars.planetapi.repository.PlanetRepository;
-
 /**
- *
  * Unit test for PlanetController
  *
  * @author xiao
- *
  */
 @WebMvcTest(PlanetController.class)
 public class PlanetControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
 
-	@MockBean
-	private PlanetRepository planetRepository;
+    @MockBean private PlanetRepository planetRepository;
 
-	@Autowired
-	private ObjectMapper mapper;
+    @Autowired private ObjectMapper mapper;
 
-	private final String planetEndpoint = "/api/v1/planets";
+    private static final String planetEndpoint = "/api/v1/planets";
 
-	/**
-	 * Testing getAllPlanets resource
-	 */
-	@Test
-	public void getAllPlanets_shouldReturnOk() throws Exception {
-		List<Planet> planets = Arrays.asList(new Planet("1", "Tatooine", "arid", "desert", "5"),
-				new Planet("2", "Alderaan", "temperate", "grasslands, mountains", "2"),
-				new Planet("3", "Yavin IV", "temperate, tropical", "jungle, rainforests", "1"));
+    /** Testing getAllPlanets resource */
+    @Test
+    public void getAllPlanets_shouldReturnOk() throws Exception {
+        List<Planet> planets =
+                Arrays.asList(
+                        new Planet("1", "Tatooine", "arid", "desert", "5"),
+                        new Planet("2", "Alderaan", "temperate", "grasslands, mountains", "2"),
+                        new Planet(
+                                "3",
+                                "Yavin IV",
+                                "temperate, tropical",
+                                "jungle, rainforests",
+                                "1"));
 
-		when(planetRepository.findAll()).thenReturn(planets);
+        when(planetRepository.findAll()).thenReturn(planets);
 
-		mockMvc.perform(get(planetEndpoint)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(jsonPath("$", hasSize(3)))
-				.andExpect(jsonPath("$[0].id", is("1"))).andExpect(jsonPath("$[0].name", is("Tatooine")))
-				.andExpect(jsonPath("$[0].climate", is("arid"))).andExpect(jsonPath("$[0].terrain", is("desert")))
-				.andExpect(jsonPath("$[0].starWarsApparition", is("5")))
+        mockMvc.perform(get(planetEndpoint))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].id", is("1")))
+                .andExpect(jsonPath("$[0].name", is("Tatooine")))
+                .andExpect(jsonPath("$[0].climate", is("arid")))
+                .andExpect(jsonPath("$[0].terrain", is("desert")))
+                .andExpect(jsonPath("$[0].starWarsApparition", is("5")))
+                .andExpect(jsonPath("$[1].id", is("2")))
+                .andExpect(jsonPath("$[1].name", is("Alderaan")))
+                .andExpect(jsonPath("$[1].climate", is("temperate")))
+                .andExpect(jsonPath("$[1].terrain", is("grasslands, mountains")))
+                .andExpect(jsonPath("$[1].starWarsApparition", is("2")))
+                .andExpect(jsonPath("$[2].id", is("3")))
+                .andExpect(jsonPath("$[2].name", is("Yavin IV")))
+                .andExpect(jsonPath("$[2].climate", is("temperate, tropical")))
+                .andExpect(jsonPath("$[2].terrain", is("jungle, rainforests")))
+                .andExpect(jsonPath("$[2].starWarsApparition", is("1")));
 
-				.andExpect(jsonPath("$[1].id", is("2"))).andExpect(jsonPath("$[1].name", is("Alderaan")))
-				.andExpect(jsonPath("$[1].climate", is("temperate")))
-				.andExpect(jsonPath("$[1].terrain", is("grasslands, mountains")))
-				.andExpect(jsonPath("$[1].starWarsApparition", is("2")))
+        verify(planetRepository, times(1)).findAll();
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-				.andExpect(jsonPath("$[2].id", is("3"))).andExpect(jsonPath("$[2].name", is("Yavin IV")))
-				.andExpect(jsonPath("$[2].climate", is("temperate, tropical")))
-				.andExpect(jsonPath("$[2].terrain", is("jungle, rainforests")))
-				.andExpect(jsonPath("$[2].starWarsApparition", is("1")));
+    @Test
+    public void getAllPlanets_EmptyList_shouldReturnOk() throws Exception {
 
-		verify(planetRepository, times(1)).findAll();
-		verifyNoMoreInteractions(planetRepository);
-	}
+        when(planetRepository.findAll()).thenReturn(new ArrayList<Planet>());
 
-	@Test
-	public void getAllPlanets_EmptyList_shouldReturnOk() throws Exception {
+        mockMvc.perform(get(planetEndpoint))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$", hasSize(0)));
 
-		when(planetRepository.findAll()).thenReturn(new ArrayList<Planet>());
+        verify(planetRepository, times(1)).findAll();
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-		mockMvc.perform(get(planetEndpoint)).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$", hasSize(0)));
+    /** Testing getAllPlanetByName resource */
+    @Test
+    public void getPlanetByName_Alderaan_shouldReturnOk() throws Exception {
+        List<Planet> planets =
+                Arrays.asList(
+                        new Planet("1", "Alderaan", "temperate", "grasslands, mountains", ""),
+                        new Planet("2", "Alderaan", "temperate", "grasslands, mountains", ""));
 
-		verify(planetRepository, times(1)).findAll();
-		verifyNoMoreInteractions(planetRepository);
-	}
+        when(planetRepository.findByName("Alderaan")).thenReturn(planets);
 
-	/**
-	 * Testing getAllPlanetByName resource
-	 */
-	@Test
-	public void getPlanetByName_Alderaan_shouldReturnOk() throws Exception {
-		List<Planet> planets = Arrays.asList(new Planet("1", "Alderaan", "temperate", "grasslands, mountains", ""),
-				new Planet("2", "Alderaan", "temperate", "grasslands, mountains", ""));
+        mockMvc.perform(get(planetEndpoint + "?name=Alderaan"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$[0].id", is("1")))
+                .andExpect(jsonPath("$[0].name", is("Alderaan")))
+                .andExpect(jsonPath("$[0].climate", is("temperate")))
+                .andExpect(jsonPath("$[0].terrain", is("grasslands, mountains")))
+                .andExpect(jsonPath("$[0].starWarsApparition", is("2")))
+                .andExpect(jsonPath("$[1].id", is("2")))
+                .andExpect(jsonPath("$[1].name", is("Alderaan")))
+                .andExpect(jsonPath("$[1].climate", is("temperate")))
+                .andExpect(jsonPath("$[1].terrain", is("grasslands, mountains")))
+                .andExpect(jsonPath("$[1].starWarsApparition", is("2")));
 
-		when(planetRepository.findByName("Alderaan")).thenReturn(planets);
+        verify(planetRepository, times(1)).findByName("Alderaan");
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-		mockMvc.perform(get(planetEndpoint + "?name=Alderaan")).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$[0].id", is("1"))).andExpect(jsonPath("$[0].name", is("Alderaan")))
-				.andExpect(jsonPath("$[0].climate", is("temperate")))
-				.andExpect(jsonPath("$[0].terrain", is("grasslands, mountains")))
-				.andExpect(jsonPath("$[0].starWarsApparition", is("2")))
+    @Test
+    public void getPlanetByName_Mars_shouldReturnNotFound() throws Exception {
 
-				.andExpect(jsonPath("$[1].id", is("2"))).andExpect(jsonPath("$[1].name", is("Alderaan")))
-				.andExpect(jsonPath("$[1].climate", is("temperate")))
-				.andExpect(jsonPath("$[1].terrain", is("grasslands, mountains")))
-				.andExpect(jsonPath("$[1].starWarsApparition", is("2")));
+        when(planetRepository.findByName("mars")).thenReturn(null);
 
-		verify(planetRepository, times(1)).findByName("Alderaan");
-		verifyNoMoreInteractions(planetRepository);
-	}
+        mockMvc.perform(get(planetEndpoint + "?name=mars"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$", hasSize(0)));
 
-	@Test
-	public void getPlanetByName_Mars_shouldReturnNotFound() throws Exception {
+        verify(planetRepository, times(1)).findByName("mars");
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-		when(planetRepository.findByName("mars")).thenReturn(null);
+    /** Testing getPlanetById resource */
+    @Test
+    public void getPlanetById_1_shouldReturnOk() throws Exception {
+        Optional<Planet> planet =
+                Optional.of(new Planet("1", "Alderaan", "temperate", "grasslands, mountains", "2"));
 
-		mockMvc.perform(get(planetEndpoint + "?name=mars")).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-				.andExpect(jsonPath("$", hasSize(0)));
+        when(planetRepository.findById("1")).thenReturn(planet);
 
-		verify(planetRepository, times(1)).findByName("mars");
-		verifyNoMoreInteractions(planetRepository);
-	}
+        mockMvc.perform(get(planetEndpoint + "/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.id", is("1")))
+                .andExpect(jsonPath("$.name", is("Alderaan")))
+                .andExpect(jsonPath("$.climate", is("temperate")))
+                .andExpect(jsonPath("$.terrain", is("grasslands, mountains")))
+                .andExpect(jsonPath("$.starWarsApparition", is("2")));
 
-	/**
-	 * Testing getPlanetById resource
-	 */
-	@Test
-	public void getPlanetById_1_shouldReturnOk() throws Exception {
-		Optional<Planet> planet = Optional.of(new Planet("1", "Alderaan", "temperate", "grasslands, mountains", "2"));
+        verify(planetRepository, times(1)).findById("1");
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-		when(planetRepository.findById("1")).thenReturn(planet);
+    @Test
+    public void getPlanetById_null_shouldReturnNotFound() throws Exception {
 
-		mockMvc.perform(get(planetEndpoint + "/1")).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(jsonPath("$.id", is("1")))
-				.andExpect(jsonPath("$.name", is("Alderaan"))).andExpect(jsonPath("$.climate", is("temperate")))
-				.andExpect(jsonPath("$.terrain", is("grasslands, mountains")))
-				.andExpect(jsonPath("$.starWarsApparition", is("2")));
+        when(planetRepository.findById("1")).thenReturn(Optional.empty());
 
-		verify(planetRepository, times(1)).findById("1");
-		verifyNoMoreInteractions(planetRepository);
-	}
+        mockMvc.perform(get(planetEndpoint + "/1")).andExpect(status().isNotFound());
 
-	@Test
-	public void getPlanetById_null_shouldReturnNotFound() throws Exception {
+        verify(planetRepository, times(1)).findById("1");
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-		when(planetRepository.findById("1")).thenReturn(Optional.empty());
+    /** Testing create planet resource */
+    @Test
+    public void createPlanet_Tatooine_shouldReturnCreated() throws Exception {
 
-		mockMvc.perform(get(planetEndpoint + "/1")).andExpect(status().isNotFound());
+        var planetDTO = new PlanetRequestDTO("Tatooine", "arid", "desert");
 
-		verify(planetRepository, times(1)).findById("1");
-		verifyNoMoreInteractions(planetRepository);
-	}
+        var planetPersisted = planetDTO.convertToEntity();
+        planetPersisted.setId("123");
 
-	/**
-	 * Testing create planet resource
-	 */
-	@Test
-	public void createPlanet_Tatooine_shouldReturnCreated() throws Exception {
+        when(planetRepository.save(planetDTO.convertToEntity())).thenReturn(planetPersisted);
 
-		var planetDTO = new PlanetRequestDTO("Tatooine", "arid", "desert");
+        mockMvc.perform(
+                        post(planetEndpoint)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(mapper.writeValueAsString(planetDTO)))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("Location", "/planets/" + planetPersisted.getId()));
 
-		var planetPersisted = planetDTO.convertToEntity();
-		planetPersisted.setId("123");
+        verify(planetRepository, times(1)).save(planetDTO.convertToEntity());
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-		when(planetRepository.save(planetDTO.convertToEntity())).thenReturn(planetPersisted);
+    @Test
+    public void createPlanet_null_shouldReturnBadRequest() throws Exception {
 
-		mockMvc.perform(post(planetEndpoint).contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(planetDTO))).andExpect(status().isCreated())
-				.andExpect(header().string("Location", "/planets/" + planetPersisted.getId()));
+        mockMvc.perform(post(planetEndpoint)).andExpect(status().isBadRequest());
+    }
 
-		verify(planetRepository, times(1)).save(planetDTO.convertToEntity());
-		verifyNoMoreInteractions(planetRepository);
-	}
+    /** Testing delete planet resource */
+    @Test
+    public void deletePlanet_1_shouldReturnOk() throws Exception {
+        Optional<Planet> planet =
+                Optional.of(
+                        new Planet(
+                                "1", "Yavin IV", "temperate, tropical", "jungle, rainforests", ""));
 
-	@Test
-	public void createPlanet_null_shouldReturnBadRequest() throws Exception {
+        var idPlanet = planet.get().getId();
 
-		mockMvc.perform(post(planetEndpoint)).andExpect(status().isBadRequest());
-	}
+        when(planetRepository.findById(idPlanet)).thenReturn(planet);
+        doNothing().when(planetRepository).deleteById(idPlanet);
 
-	/**
-	 * Testing delete planet resource
-	 */
-	@Test
-	public void deletePlanet_1_shouldReturnOk() throws Exception {
-		Optional<Planet> planet = Optional
-				.of(new Planet("1", "Yavin IV", "temperate, tropical", "jungle, rainforests", ""));
+        mockMvc.perform(
+                        delete(planetEndpoint + "/" + idPlanet)
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
 
-		var idPlanet = planet.get().getId();
+        verify(planetRepository, times(1)).findById(idPlanet);
+        verify(planetRepository, times(1)).deleteById(idPlanet);
+        verifyNoMoreInteractions(planetRepository);
+    }
 
-		when(planetRepository.findById(idPlanet)).thenReturn(planet);
-		doNothing().when(planetRepository).deleteById(idPlanet);
+    @Test
+    public void deletePlanet_null_shouldReturnNotFound() throws Exception {
+        String idPlanet = "1";
 
-		mockMvc.perform(delete(planetEndpoint + "/" + idPlanet).contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNoContent());
+        when(planetRepository.findById(idPlanet)).thenReturn(Optional.empty());
+        doNothing().when(planetRepository).deleteById(idPlanet);
 
-		verify(planetRepository, times(1)).findById(idPlanet);
-		verify(planetRepository, times(1)).deleteById(idPlanet);
-		verifyNoMoreInteractions(planetRepository);
-	}
+        mockMvc.perform(delete(planetEndpoint + "/" + idPlanet)).andExpect(status().isNotFound());
 
-	@Test
-	public void deletePlanet_null_shouldReturnNotFound() throws Exception {
-		String idPlanet = "1";
+        verify(planetRepository, times(1)).findById(idPlanet);
+        verify(planetRepository, times(0)).deleteById(idPlanet);
 
-		when(planetRepository.findById(idPlanet)).thenReturn(Optional.empty());
-		doNothing().when(planetRepository).deleteById(idPlanet);
-
-		mockMvc.perform(delete(planetEndpoint + "/" + idPlanet)).andExpect(status().isNotFound());
-
-		verify(planetRepository, times(1)).findById(idPlanet);
-		verify(planetRepository, times(0)).deleteById(idPlanet);
-
-		verifyNoMoreInteractions(planetRepository);
-	}
+        verifyNoMoreInteractions(planetRepository);
+    }
 }
