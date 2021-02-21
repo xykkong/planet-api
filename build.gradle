@@ -6,8 +6,7 @@ plugins {
     id 'com.palantir.docker' version "0.26.0"
     id "com.github.spotbugs" version "4.6.1"
     id "com.diffplug.spotless" version "5.10.2"
-    id "net.ltgt.errorprone"  version "1.3.0"
-    id "net.ltgt.nullaway"  version "1.0.2"
+    id 'pmd'
 }
 
 group = 'com.example.starwars'
@@ -63,7 +62,7 @@ docker {
 spotless {
   format 'misc', {
     // define the files to apply `misc` to
-    target '*.gradle', '*.md', '.gitignore', '.properties'
+    target '*.gradle', '*.md', '.gitignore', '.properties', '.yml'
 
     // define the steps to apply to those files
     trimTrailingWhitespace()
@@ -82,14 +81,12 @@ spotless {
   }
 }
 
-import net.ltgt.gradle.errorprone.CheckSeverity
-tasks.withType(JavaCompile).configureEach {
-  if (!name.toLowerCase().contains("test")) {
-    options.errorprone {
-      check("NullAway", CheckSeverity.ERROR)
-      option("NullAway:AnnotatedPackages", "com.example.starwars.planetapi")
-    }
-  }
+pmd {
+    consoleOutput = true
+    toolVersion = "6.31.0"
+    rulesMinimumPriority = 5
+    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+    ignoreFailures = true
 }
 
 test {
@@ -105,15 +102,8 @@ dependencies {
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    compileOnly 'org.projectlombok:lombok'
-
-    annotationProcessor "com.uber.nullaway:nullaway:0.8.0"
     annotationProcessor 'org.projectlombok:lombok'
-
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
-
-    errorprone "com.google.errorprone:error_prone_core:2.5.1"
-    errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
 }
